@@ -178,7 +178,7 @@ def education(reply_token):
 
 
 def default(reply_token):
-    message1 = TextMessage(text="請輸入下列關鍵字來更認識品瑄：\n"+
+    message1 = TextMessage(text="請輸入下列關鍵字或點選圖文選單來更認識品瑄：\n"+
                                 "「自我介紹」\n"+
                                 "「工作經歷」\n"+
                                 "「求學歷程」\n"+
@@ -203,7 +203,7 @@ def handle_follow(event):
         profile = line_bot_api.get_profile(event.source.user_id)
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text='嗨' + profile.display_name+ '，歡迎加入這個Line bot來認識黃品瑄Pin-Shiuan！\n'+
-                                                                                 "請輸入下列關鍵字來更認識品瑄：\n"+
+                                                                                 "請輸入下列關鍵字或點選圖文選單來更認識品瑄：\n"+
                                 "「自我介紹」\n"+
                                 "「工作經歷」\n"+
                                 "「求學歷程」\n"+
