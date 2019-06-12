@@ -68,11 +68,262 @@ def handle_message(event):
         projectd(event.reply_token)
     elif text.find("參賽經歷") != -1:
         comp(event.reply_token)          
-        
+    elif text.find("我要記帳") != -1:
+        acc(event.reply_token)     
+    elif text.find("食") != -1:
+        food(event.reply_token)
+    elif text.find("行") != -1:
+        trans(event.reply_token) 
+    elif text.find("樂") != -1:
+        fun(event.reply_token)
+    elif text.find("其他") != -1:
+        other(event.reply_token)
+    elif text.find("心理測驗") != -1:
+        test(event.reply_token)  
+    elif text.find("1.A") != -1:
+        test2(event.reply_token)
+    elif text.find("1.B") != -1:
+        test2(event.reply_token) 
+    elif text.find("1.C") != -1:
+        test2(event.reply_token)               
+    elif text.find("2.A") != -1:
+        test3(event.reply_token)   
+    elif text.find("2.B") != -1:
+        test3(event.reply_token)  
+    elif text.find("2.C") != -1:
+        test3(event.reply_token)       
+    elif text.find("3.A") != -1:
+        test4(event.reply_token)
+    elif text.find("3.B") != -1:
+        test4(event.reply_token)
+    elif text.find("3.C") != -1:
+        test4(event.reply_token)
+    elif text.find("4.A") != -1:
+        test5(event.reply_token)
+    elif text.find("4.B") != -1:
+        test5(event.reply_token) 
+    elif text.find("4.C") != -1:
+        test5(event.reply_token)    
         pass
     else:
         default(event.reply_token)
 
+#左右滑
+def acc(reply_token):
+
+    carousel_template = CarouselTemplate(columns=[
+
+        CarouselColumn(text='食物', title='食',thumbnail_image_url='https://i.imgur.com/1HwOvRC.png', 
+
+            actions=[
+
+                MessageTemplateAction(
+
+                    label='食', text='食')
+
+        ]),
+
+        CarouselColumn(text='交通', title='行',thumbnail_image_url='https://i.imgur.com/SmrcGt4.png', 
+
+            actions=[
+
+                MessageTemplateAction(
+
+                    label='行', text='行')
+
+        ]),
+
+        CarouselColumn(text='娛樂', title='樂',thumbnail_image_url='https://i.imgur.com/3PKG2Lj.png',
+
+            actions=[
+
+                MessageTemplateAction(
+
+                    label='樂', text='樂')
+
+        ]),
+
+        CarouselColumn(text='其他項目', title='其他',thumbnail_image_url='https://i.imgur.com/GtWspZb.png', 
+
+            actions=[
+
+                MessageTemplateAction(
+
+                    label='其他', text='其他')
+
+        ])
+
+    ])
+
+    template_message = TemplateSendMessage(
+
+        alt_text='我要記帳', template=carousel_template)
+
+    
+
+    line_bot_api.reply_message(reply_token, template_message)
+
+   #食 
+def food(reply_token):
+    
+    buttons_template = ButtonsTemplate(
+        title='食', text='請選擇下方分類',
+        #按鈕區域的圖片
+        thumbnail_image_url = 'https://i.imgur.com/1HwOvRC.png', 
+        #兩個按鈕
+        actions=[
+            MessageTemplateAction(label='「早餐」', text='早餐'),
+            MessageTemplateAction(label='「午餐」', text='午餐'),
+            MessageTemplateAction(label='「晚餐」', text='晚餐')
+        ])
+    template_message = TemplateSendMessage(
+        alt_text='食', template=buttons_template)
+    
+    line_bot_api.reply_message(reply_token, template_message)
+#行 
+def trans(reply_token):
+    
+    buttons_template = ButtonsTemplate(
+        title='行', text='請選擇下方分類',
+        #按鈕區域的圖片
+        thumbnail_image_url = 'https://i.imgur.com/SmrcGt4.png', 
+        #兩個按鈕
+        actions=[
+            MessageTemplateAction(label='「公車」', text='公車'),
+            MessageTemplateAction(label='「捷運」', text='捷運')
+        ])
+    template_message = TemplateSendMessage(
+        alt_text='行', template=buttons_template)
+    
+    line_bot_api.reply_message(reply_token, template_message)
+#樂 
+def fun(reply_token):
+    
+    buttons_template = ButtonsTemplate(
+        title='樂', text='請選擇下方分類',
+        #按鈕區域的圖片
+        thumbnail_image_url = 'https://i.imgur.com/3PKG2Lj.png', 
+        #兩個按鈕
+        actions=[
+            MessageTemplateAction(label='「唱歌」', text='唱歌'),
+            MessageTemplateAction(label='「玩桌遊」', text='玩桌遊'),
+            MessageTemplateAction(label='「看電影」', text='看電影')
+        ])
+    template_message = TemplateSendMessage(
+        alt_text='樂', template=buttons_template)
+    
+    line_bot_api.reply_message(reply_token, template_message)
+#其他
+def other(reply_token):
+    
+    buttons_template = ButtonsTemplate(
+        title='其他', text='請選擇下方分類',
+        #按鈕區域的圖片
+        thumbnail_image_url = 'https://i.imgur.com/GtWspZb.png', 
+        #兩個按鈕
+        actions=[
+            MessageTemplateAction(label='「影印」', text='影印'),
+            MessageTemplateAction(label='「日常用品」', text='日常用品'),
+            MessageTemplateAction(label='「雜支」', text='雜支')
+        ])
+    template_message = TemplateSendMessage(
+        alt_text='其他', template=buttons_template)
+    
+    line_bot_api.reply_message(reply_token, template_message)
+#心理測驗&第一題
+def test(reply_token):
+    message1 = TextMessage(text="來測驗自己適合甚麼方法投資吧!")
+    
+    buttons_template = ButtonsTemplate(
+        title='1.假如你的朋友找你一起創業，你會？', text='請選擇以下按鈕',
+        actions=[
+
+            MessageTemplateAction(label='A.當然要把握機會！', text='1.A'),
+            MessageTemplateAction(label='B.再回去思考一下', text='1.B'),
+            MessageTemplateAction(label='C.算了，我不想要虧錢', text='1.C')
+
+        ])
+
+    template_message = TemplateSendMessage(
+        alt_text='心理測驗', template=buttons_template)
+    line_bot_api.reply_message(
+        reply_token,
+        [message1,template_message])        
+
+#心理測驗第二題
+def test2(reply_token):
+   
+    buttons_template = ButtonsTemplate(
+        title='2.與朋友出去玩，活動都是由誰決定？', text='請選擇以下按鈕',
+        actions=[
+
+            MessageTemplateAction(label='A.幾乎都是以我的意見為主', text='2.A'),
+            MessageTemplateAction(label='B.大家一起討論並尋求共識', text='2.B'),
+            MessageTemplateAction(label='C.我不喜歡出主意', text='2.C')
+
+        ])
+
+    template_message = TemplateSendMessage(
+        alt_text='第二題', template=buttons_template)
+    line_bot_api.reply_message(
+        reply_token,
+        template_message)      
+
+#心理測驗第三題
+def test3(reply_token):
+   
+    buttons_template = ButtonsTemplate(
+        title='3.某公司正在打折，滿五千元才有贈品，你會？', text='請選擇以下按鈕',
+        actions=[
+
+            MessageTemplateAction(label='A.馬上行動', text='3.A'),
+            MessageTemplateAction(label='B.看看贈品是甚麼再決定', text='3.B'),
+            MessageTemplateAction(label='C.完全不會心動', text='3.C')
+
+        ])
+
+    template_message = TemplateSendMessage(
+        alt_text='第三題', template=buttons_template)
+    line_bot_api.reply_message(
+        reply_token,
+        template_message)    
+#心理測驗第四題
+def test4(reply_token):
+   
+    buttons_template = ButtonsTemplate(
+        title='4.工作時遇到麻煩都是如何處置？', text='請選擇以下按鈕',
+        actions=[
+
+            MessageTemplateAction(label='A.自己趕快想辦法解決啊', text='4.A'),
+            MessageTemplateAction(label='B.聽聽看別人的意見', text='4.B'),
+            MessageTemplateAction(label='C.慢慢思考後再解決', text='4.C')
+
+        ])
+
+    template_message = TemplateSendMessage(
+        alt_text='第四題', template=buttons_template)
+    line_bot_api.reply_message(
+        reply_token,
+        template_message)        
+
+#心理測驗第五題
+def test5(reply_token):
+   
+    buttons_template = ButtonsTemplate(
+        title='5.如果有人報你明牌，即將大漲，你會？', text='請選擇以下按鈕',
+        actions=[
+
+            MessageTemplateAction(label='A.趕快湊錢買上幾張', text='5.A'),
+            MessageTemplateAction(label='B.找來股價走勢圖並評估', text='5.B'),
+            MessageTemplateAction(label='C.不相信有這麼好康的事情', text='5.C')
+
+        ])
+
+    template_message = TemplateSendMessage(
+        alt_text='第五題', template=buttons_template)
+    line_bot_api.reply_message(
+        reply_token,
+        template_message) 
 
 #自我介紹(文字+貼圖+圖片)
 # customize function
